@@ -1,4 +1,4 @@
-package taller3;
+package dominio;
 
 import java.util.ArrayList;
 
@@ -11,6 +11,14 @@ public class Mago {
 		super();
 		this.nombre = nombre;
 		this.listaHechizos = listaHechizos;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public ArrayList<Hechizo> getListaHechizos() {
+		return listaHechizos;
 	}
 	
 	

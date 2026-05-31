@@ -1,4 +1,4 @@
-package taller3;
+package dominio;
 
 public class HechizoPlanta extends Hechizo {
 
@@ -9,6 +9,10 @@ public class HechizoPlanta extends Hechizo {
 		super(nombre, tipo, daño);
 		this.duracionStun = ds;
 		this.cantidadPlanta = cantPlanta;
+		calcularPuntaje();
 	}
 
+	public void calcularPuntaje() {
+		setPuntaje(getDaño() + (duracionStun * cantidadPlanta));
+	}
 }

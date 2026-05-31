@@ -1,4 +1,4 @@
-package taller3;
+package dominio;
 
 public class HechizoFuego extends Hechizo {
 
@@ -7,7 +7,11 @@ public class HechizoFuego extends Hechizo {
 	public HechizoFuego(String nombre, String tipo, int daño, int dq) {
 		super(nombre, tipo, daño);
 		this.duracionQuemadura = dq;
-		// TODO Auto-generated constructor stub
+		calcularPuntaje();
+	}
+	
+	public void calcularPuntaje() {
+		setPuntaje(getDaño()*duracionQuemadura);
 	}
 
 }

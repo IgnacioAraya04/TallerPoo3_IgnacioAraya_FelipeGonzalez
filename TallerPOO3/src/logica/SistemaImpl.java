@@ -1,6 +1,10 @@
-package taller3;
+package logica;
 
 import java.util.ArrayList;
+
+import dominio.Hechizo;
+import dominio.HechizoFactory;
+import dominio.Mago;
 
 public class SistemaImpl implements Sistema {
 	ArrayList<Mago> listaMagos = new ArrayList<Mago>();
@@ -30,9 +34,10 @@ public class SistemaImpl implements Sistema {
 		
 		String[] partes = linea.split(";");
 		ArrayList<Hechizo> hechizosMago = new ArrayList<Hechizo>();
-		for (int i = 1; i < partes.length; i++) {
+		String[] partesHechizos = partes[1].split("|");
+		for (int i = 0; i < partesHechizos.length; i++) {
 			for (Hechizo hechizo : listaHechizos) {
-				if (hechizo.getNombre().equalsIgnoreCase(partes[i])) {
+				if (hechizo.getNombre().equalsIgnoreCase(partesHechizos[i])) {
 					hechizosMago.add(hechizo);
 					
 				}
@@ -42,5 +47,7 @@ public class SistemaImpl implements Sistema {
 		listaMagos.add(nuevo);
 		hechizosMago.clear();
 	}
+
+	
 
 }

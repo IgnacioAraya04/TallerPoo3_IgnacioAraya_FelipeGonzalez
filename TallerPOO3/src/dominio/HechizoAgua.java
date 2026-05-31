@@ -1,4 +1,4 @@
-package taller3;
+package dominio;
 
 public class HechizoAgua extends Hechizo {
 	private int cantidadHeal;
@@ -8,5 +8,11 @@ public class HechizoAgua extends Hechizo {
 		super(nombre, tipo, daño);
 		this.cantidadHeal = cantHeal;
 		this.PresionAgua = presionAgua;
+		calcularPuntaje();
 	}
+	
+	public void calcularPuntaje() {
+		setPuntaje((getDaño() + cantidadHeal +PresionAgua)*2);
+	}
+	
 }

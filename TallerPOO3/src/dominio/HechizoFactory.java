@@ -1,4 +1,4 @@
-package taller3;
+package dominio;
 
 public class HechizoFactory {
 	

@@ -1,4 +1,4 @@
-package taller3;
+package dominio;
 
 public class HechizoTierra extends Hechizo {
 
@@ -7,5 +7,10 @@ public class HechizoTierra extends Hechizo {
 		public HechizoTierra(String nombre, String tipo, int daño, int mejoraDefensa) {
 		super(nombre, tipo, daño);
 		this.mejoraDefensa = mejoraDefensa;
+		calcularPuntaje();
+	}
+		
+	public void calcularPuntaje() {
+		setPuntaje((getDaño() * mejoraDefensa)/2);
 	}
 }

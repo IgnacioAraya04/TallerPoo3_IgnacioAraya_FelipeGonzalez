@@ -1,4 +1,6 @@
-package taller3;
+package logica;
+
+import dominio.Hechizo;
 
 public interface Sistema {
 
