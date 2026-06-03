@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 import dominio.Hechizo;
+import dominio.Mago;
 
 public class Main {
 	static SistemaImpl sistem = new SistemaImpl();
@@ -54,7 +55,7 @@ public class Main {
 		Integer select = Integer.valueOf(scan.nextLine());
 		switch (select) {
 		case 1:
-			menuAdmin(scan);
+			MenuAdmin.getMenuAdmin().menuAdmin(scan, sistem);
 			return 0;
 		case 2:
 			menuAnalisis(scan);
@@ -67,65 +68,6 @@ public class Main {
 			return 0;
 		}
 
-	}
-
-	private static void menuAdmin(Scanner scan) {
-		boolean salir = false;
-		do {
-			try {
-				System.out.println("Menú administrador: \n" + "1) Agregar Mago.\n" + "2) Modificar Mago.\n"
-						+ "3) Eliminar Mago.\n" + "4) Agregar Hechizo.\n" + "5) Modificar Hechizo.\n"
-						+ "6) Eliminar Hechizo.\n" + "7) Salir.");
-				Integer selec = Integer.valueOf(scan.nextLine());
-
-				switch (selec) {
-				case 1:
-					String nuevoMago = "";
-					System.out.println("Nombre del Mago: ");
-					nuevoMago += scan.nextLine();
-					int num = 1;
-					do {
-						System.out.println("Seleccionar Hechizo: ");
-						for (Hechizo hechizo : sistem.listaHechizos) {
-							System.out.println((num++) + hechizo.getNombre());
-						}
-						int selec1 = Integer.valueOf(scan.nextLine());
-						nuevoMago += sistem.listaHechizos.get(selec1 - 1);
-						System.out.println("Desea agregar otro Hechizo\n" + "1) Si\n" + "2) No");
-						Integer finalizar = Integer.valueOf(scan.nextLine());
-						if (finalizar == 1) {
-							nuevoMago += "|";
-						} else {
-							break;
-						}
-					} while (true);
-					sistem.cargarMago(nuevoMago);
-				case 2:
-
-					break;
-				case 3:
-
-					break;
-				case 4:
-
-					break;
-				case 5:
-
-					break;
-				case 6:
-
-					break;
-				case 7:
-					salir = true;
-					break;
-				default:
-					System.out.println("Elegir una de las opciones disponibles\n");
-				}
-
-			} catch (Exception e) {
-				System.out.println("Valor inválido");
-			}
-		} while (!salir);
 	}
 
 	private static void menuAnalisis(Scanner scan) {
