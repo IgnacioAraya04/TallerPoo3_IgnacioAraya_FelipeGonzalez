@@ -41,7 +41,8 @@ public class SistemaImpl implements Sistema {
 
 		String[] partes = linea.split(";");
 		ArrayList<Hechizo> hechizosMago = new ArrayList<Hechizo>();
-		String[] partesHechizos = partes[1].split("|");
+		//esto deaqui quiero probar si funciona bien el split, mas que nada porque lei que se puede romper
+		String[] partesHechizos = partes[1].split("\\|"); 
 		for (int i = 0; i < partesHechizos.length; i++) {
 			for (Hechizo hechizo : listaHechizos) {
 				if (hechizo.getNombre().equalsIgnoreCase(partesHechizos[i])) {

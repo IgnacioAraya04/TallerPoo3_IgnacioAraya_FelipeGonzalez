@@ -2,6 +2,7 @@ package logica;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import dominio.Hechizo;
@@ -81,13 +82,28 @@ public class Main {
 				Integer selec = Integer.valueOf(scan.nextLine());
 				switch (selec) {
 				case 1:
-
+					//1) Top 10 Mejores Hechizos
+					System.out.println("\n ----TOP 10 MEJORES SPELLS----");
+					ArrayList<Hechizo> topSpells = new ArrayList<Hechizo>(sistem.listaHechizos);
+					for(int i = 0;	i<topSpells.size()-1;i++) {
+						for(int j = 0;j < topSpells.size() - 1-i;j++) {
+							if (topSpells.get(j).getPuntaje() < topSpells.get(j + 1).getPuntaje()) {
+								Hechizo temp = topSpells.get(j);
+								topSpells.set(j, topSpells.get(j+1));
+								topSpells.set(j+1, temp);
+							}
+						}
+					}
+					int limiteH = Math.min(10, topSpells.size());
+					for (int i = 0; i < limiteH; i++) {
+						Hechizo h = topSpells.get(i);
+						System.out.println((i+1) + ". " + h.getNombre() + "(Puntaje: " + h.getPuntaje() + ")");
+					}
 					break;
 				case 2:
-
 					break;
 				case 3:
-
+					
 					break;
 				case 4:
 

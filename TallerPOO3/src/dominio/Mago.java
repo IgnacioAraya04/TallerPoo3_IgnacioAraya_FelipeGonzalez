@@ -66,6 +66,19 @@ public class Mago {
 		}
 		return mago;
 	}
+	
+	//para sumar el puntaje total de puntaje del mago:
+	public int getPuntajeTotal() {
+		int total = 0;
+		for(Hechizo hechizo : listaHechizos) {
+			total += hechizo.getPuntaje();
+			
+		}
+		return total;
+		
+		
+		
+	}
 
 	
 }
