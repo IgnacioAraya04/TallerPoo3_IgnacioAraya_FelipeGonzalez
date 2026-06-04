@@ -28,7 +28,33 @@ public class Hechizo {
 	public int getDaño() {
 		return daño;
 	}
-	
-	
 
+	public String getTipo() {
+		return tipo;
+	}
+	
+	public String formatoTxt() {
+		return null;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public void setDaño(int daño) {
+		this.daño = daño;
+	}
+	
+	public void setEspecial1(int s) {
+		
+	}
+	public void setEspecial2(int s) {
+		
+	}
+
+	public String toString() {
+		return null;
+	}
+	
+	
 }

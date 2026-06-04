@@ -10,8 +10,26 @@ public class HechizoFuego extends Hechizo {
 		calcularPuntaje();
 	}
 	
+	
+	
+	public void setEspecial1(int duracionQuemadura) {
+		this.duracionQuemadura = duracionQuemadura;
+	}
+
+
+
 	public void calcularPuntaje() {
 		setPuntaje(getDaño()*duracionQuemadura);
+	}
+	@Override
+	public String formatoTxt() {
+		return getNombre()+";Fuego;"+getDaño()+";"+duracionQuemadura;
+	}
+	
+	@Override
+	public String toString() {
+		
+		return getNombre() + "| Tipo: "+ getTipo()+"| Daño: "+ getDaño()+"| Duracion de quemadura: "+ duracionQuemadura ;
 	}
 
 }

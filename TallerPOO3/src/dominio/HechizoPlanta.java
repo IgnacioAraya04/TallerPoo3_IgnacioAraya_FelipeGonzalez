@@ -11,8 +11,27 @@ public class HechizoPlanta extends Hechizo {
 		this.cantidadPlanta = cantPlanta;
 		calcularPuntaje();
 	}
+	@Override
+	public void setEspecial1(int dStun) {
+		this.duracionStun = dStun;
+	}
+	
+	public void setEspecial2(int cPlantas) {
+		this.cantidadPlanta = cPlantas;
+	}
 
 	public void calcularPuntaje() {
 		setPuntaje(getDaño() + (duracionStun * cantidadPlanta));
 	}
+	@Override
+	public String formatoTxt() {
+		return getNombre()+";Planta;"+getDaño()+";"+duracionStun+","+cantidadPlanta;
+	}
+	
+	@Override
+	public String toString() {
+		
+		return getNombre() + "| Tipo: "+ getTipo()+"| Daño: "+ getDaño()+"| Duración del Stun: "+ duracionStun +"| Cantidad de plantas: "+cantidadPlanta;
+	}
+
 }
