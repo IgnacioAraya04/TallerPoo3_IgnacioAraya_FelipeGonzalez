@@ -85,6 +85,7 @@ public class Main {
 				case 1:
 					//1) Top 10 Mejores Hechizos
 					System.out.println("\n ----TOP 10 MEJORES SPELLS----");
+					System.out.println("");
 					ArrayList<Hechizo> topSpells = new ArrayList<Hechizo>(sistem.listaHechizos);
 					for(int i = 0;	i<topSpells.size()-1;i++) {
 						for(int j = 0;j < topSpells.size() - 1-i;j++) {
@@ -99,11 +100,12 @@ public class Main {
 					for (int i = 0; i < limiteH; i++) {
 						Hechizo h = topSpells.get(i);
 						System.out.println((i+1) + ". " + h.getNombre() + "(Puntaje: " + h.getPuntaje() + ")");
-					}
+					} System.out.println("\n");
 					break;
 				case 2:
 					// TOP 3 MEJORES MAGOS
 					System.out.println("\n --- TOP 3 MEJORES MAGOS ---");
+					System.out.println("");
 					ArrayList<Mago> topMagos = new ArrayList<>(sistem.listaMagos);
 					
 					for(int i = 0; i< topMagos.size()-1;i++ ) {
@@ -119,12 +121,22 @@ public class Main {
 					for (int i = 0; i < limiteM; i++) {
 						Mago m = topMagos.get(i);
 						System.out.println((i+1) + ". " + m.getNombre() + "(puntaje total: " + m.getPuntajeTotal() + ")");
-					}
+					} System.out.println("\n");
 					break;
 				case 3:
-					
+					//Mostrar todos los Hechizos.
+					System.out.println("\n --- TODOS LOS SPELLS ---");
+					System.out.println("");
+					for(Hechizo h : sistem.listaHechizos) {
+						System.out.println("- " + h.getNombre());
+					} System.out.println("\n");
 					break;
 				case 4:
+					System.out.println("\n --- TODOS LOS MAGOS ---");
+					System.out.println("");
+					for(Mago m : sistem.listaMagos) {
+						System.out.println("- " + m.getNombre());
+					} System.out.println("\n");
 
 					break;
 				case 5:
