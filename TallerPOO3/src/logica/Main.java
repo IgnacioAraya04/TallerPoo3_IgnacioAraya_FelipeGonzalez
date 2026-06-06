@@ -81,6 +81,7 @@ public class Main {
 						+ "6) Mostrar todos los magos junto a su puntuación.\n" + "7) Salir.");
 				Integer selec = Integer.valueOf(scan.nextLine());
 				switch (selec) {
+				
 				case 1:
 					//1) Top 10 Mejores Hechizos
 					System.out.println("\n ----TOP 10 MEJORES SPELLS----");
@@ -101,6 +102,24 @@ public class Main {
 					}
 					break;
 				case 2:
+					// TOP 3 MEJORES MAGOS
+					System.out.println("\n --- TOP 3 MEJORES MAGOS ---");
+					ArrayList<Mago> topMagos = new ArrayList<>(sistem.listaMagos);
+					
+					for(int i = 0; i< topMagos.size()-1;i++ ) {
+						for(int j = 0; j < topMagos.size() -1-i; j++) {
+							if (topMagos.get(j).getPuntajeTotal() < topMagos.get(j + 1).getPuntajeTotal()) {
+								Mago magoTemp = topMagos.get(j);
+								topMagos.set(j, topMagos.get(j + 1));
+								topMagos.set(j + 1, magoTemp);
+							}
+						}
+					}
+					int limiteM = Math.min(3, topMagos.size());
+					for (int i = 0; i < limiteM; i++) {
+						Mago m = topMagos.get(i);
+						System.out.println((i+1) + ". " + m.getNombre() + "(puntaje total: " + m.getPuntajeTotal() + ")");
+					}
 					break;
 				case 3:
 					
