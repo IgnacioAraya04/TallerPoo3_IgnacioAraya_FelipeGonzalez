@@ -53,7 +53,7 @@ public class SistemaImpl implements Sistema {
 		}
 		Mago nuevo = new Mago(partes[0], hechizosMago);
 		listaMagos.add(nuevo);
-		hechizosMago.clear();
+
 	}
 
 	@Override
