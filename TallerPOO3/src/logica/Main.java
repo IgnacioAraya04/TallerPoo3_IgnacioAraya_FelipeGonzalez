@@ -1,5 +1,7 @@
 package logica;
-
+/* Ignacio Araya Munizaga 21.824.045-3 Ingenieria en tecnologias de la información
+ * Felipe Gonzalez Zuleta 21.776.516-1 Ingenieria en tecnologias de la información
+ */
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
