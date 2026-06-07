@@ -95,7 +95,4 @@ public class Mago {
 		
 	}
 
-	public int size() {
-		return listaHechizos.size() ;
-	}
 }
