@@ -54,6 +54,21 @@ public class Mago {
 		}
 		return hechizos;
 	}
+	
+	public String regexTxt() {
+		String mago = "" ;
+		mago += nombre+";" ;
+		for (int i = 0; i < listaHechizos.size(); i++) {
+			if (i == 0) {
+				mago +=   listaHechizos.get(i).getNombre();
+			} else {
+				mago += "\\|" + listaHechizos.get(i).getNombre();
+			}
+		}
+		return mago;
+	}
+	
+	
 	public String magoFormatoTxt() {
 		String mago = "" ;
 		mago += nombre+";" ;
@@ -80,5 +95,7 @@ public class Mago {
 		
 	}
 
-	
+	public int size() {
+		return listaHechizos.size() ;
+	}
 }

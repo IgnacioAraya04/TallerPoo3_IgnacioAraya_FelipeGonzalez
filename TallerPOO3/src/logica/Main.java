@@ -16,6 +16,7 @@ public class Main {
 
 		cargarHechizos();
 		cargarMagos();
+		
 		Integer salir = 0;
 
 		do {
@@ -52,6 +53,10 @@ public class Main {
 	}
 
 	private static int menuInicial(Scanner scan) {
+		try {
+			
+		
+		
 		System.out.println("1) Menú administrador.\n" + "2) Menú análisis. \n" + "3) Salir.\n");
 		Integer select = Integer.valueOf(scan.nextLine());
 		switch (select) {
@@ -68,7 +73,10 @@ public class Main {
 			System.out.println("Seleccionar una de las opciones.");
 			return 0;
 		}
-
+		} catch (Exception e) {
+			System.out.println("Valor incorrecto ingresado, cerrando el programa");
+			return 3;
+		}
 	}
 
 

@@ -3,13 +3,11 @@ package logica;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import dominio.Hechizo;
 import dominio.HechizoFactory;
 import dominio.Mago;
@@ -58,9 +56,8 @@ public class SistemaImpl implements Sistema {
 
 	@Override
 	public void agregarTexto(String string, String txt) {
-		BufferedWriter escritor;
 		try {
-			escritor = new BufferedWriter(new FileWriter(txt, true));
+			BufferedWriter escritor = new BufferedWriter(new FileWriter(txt, true));
 			escritor.newLine();
 			escritor.write(string);
 			escritor.close();
@@ -98,7 +95,7 @@ public class SistemaImpl implements Sistema {
 			}
 			lector.close();
 
-			String textoNuevo = lista.replaceAll(original, modificación);
+			String textoNuevo = lista.replaceAll(original,modificación);
 			FileWriter escritor = new FileWriter(archivo);
 			escritor.write(textoNuevo);
 			escritor.close();
@@ -119,7 +116,7 @@ public class SistemaImpl implements Sistema {
 			}
 			scanCont.close();
 		} catch (Exception e) {
-			System.out.println("Para romprese aca no deberia ni  para empezar lmao");
+			System.out.println("Para romprese aca no deberia ni empezar lmao");
 		}
 		
 		BufferedReader lector;
@@ -132,14 +129,16 @@ public class SistemaImpl implements Sistema {
 		Integer contador = 0;
 
 		while ((palabras = lector.readLine()) != null) {
-			if (contador == contadorLineas - 1) {
-				lista += palabras;
-			} else {
-				if (!palabras.equalsIgnoreCase(original)) {
-					lista += palabras + "\r\n";
+			
+			if (!palabras.equalsIgnoreCase(original)) {
+				if (contador == contadorLineas - 1) {
+					lista += palabras;
+				} else {
+					lista += palabras+ "\r\n";
+					contador++ ;
 				}
-				contador++;
 			}
+			
 		}
 		lector.close();
 

@@ -31,16 +31,22 @@ public class MenuAdmin {
 				switch (selec) {
 				case 1:
 					agregarMago(scan, sistem);
+					break;
 				case 2:
 					modificarMago(scan, sistem);
+					break;
 				case 3:
 					eliminarMago(scan, sistem);
+					break;
 				case 4:
 					agregarHechizo(scan, sistem);
+					break;
 				case 5:
 					modificarHechizo(scan, sistem);
+					break;
 				case 6:
 					eliminarHechizo(scan, sistem);
+					break;
 				case 7:
 					salir = true;
 					break;
@@ -49,7 +55,7 @@ public class MenuAdmin {
 				}
 
 			} catch (Exception e) {
-				System.out.println("Valor inválido");
+				System.out.println("Valor inválido ");
 			}
 		} while (!salir);
 	}
@@ -58,24 +64,27 @@ public class MenuAdmin {
 		String nuevoMago = "";
 		System.out.println("Nombre del Mago: ");
 		nuevoMago += scan.nextLine();
-		int num = 1;
+		nuevoMago +=";";
+		Integer finalizar = 1;
 		do {
+			int num = 1;
 			System.out.println("Seleccionar Hechizo: ");
 			for (Hechizo hechizo : sistem.listaHechizos) {
-				System.out.println((num++) + hechizo.getNombre());
+				System.out.println((num++) +") " +hechizo.getNombre());
 			}
+			System.out.println("Selección:");
 			int selec1 = Integer.valueOf(scan.nextLine());
-			nuevoMago += sistem.listaHechizos.get(selec1 - 1);
-			System.out.println("Desea agregar otro Hechizo\n" + "1) Si\n" + "2) No");
-			Integer finalizar = Integer.valueOf(scan.nextLine());
+			nuevoMago += sistem.listaHechizos.get(selec1 - 1).getNombre();
+			System.out.println("Desea agregar otro Hechizo?\n" + "1) Si\n" + "2) No");
+			finalizar = Integer.valueOf(scan.nextLine());
 			if (finalizar == 1) {
 				nuevoMago += "|";
 			} else {
-				break;
+				finalizar = 2;
 			}
-		} while (true);
+		} while (finalizar !=  2);
 		sistem.cargarMago(nuevoMago);
-		sistem.agregarTexto(nuevoMago, "Magos.txt");
+		sistem.agregarTexto(nuevoMago,"Magos.txt");
 	}
 
 	private void modificarMago(Scanner scan, SistemaImpl sistem) {
@@ -84,18 +93,20 @@ public class MenuAdmin {
 				System.out.println("Que mago desea modificar?");
 				int contador = 1;
 				for (Mago mago : sistem.listaMagos) {
-					System.out.println((contador++) + mago.print());
+					System.out.println((contador++)+") " + mago.print());
 				}
+				System.out.print("Seleccion:");
 				Integer selec = Integer.valueOf(scan.nextLine());
 
 				System.out.println("Desea cambiar el nombre del mago o un hechizo?\n" + "1) Nombre\n" + "2) Hechizo");
 				Integer cambio = Integer.valueOf(scan.nextLine());
-				String magoOriginal = sistem.listaMagos.get(selec - 1).magoFormatoTxt();
+				String magoOriginal = sistem.listaMagos.get(selec - 1).regexTxt();
 				if (cambio == 1) {
 					System.out.println("Cual es el nuevo nombre?");
 					String nombreNuevo = scan.nextLine();
-					nombreNuevo += ";" + sistem.listaMagos.get(selec - 1).hechizosFormatoTxt();
-					sistem.modificarTexto(nombreNuevo, sistem.listaMagos.get(selec - 1).magoFormatoTxt(), nombreNuevo);
+					String	nombreNuevoTxt = nombreNuevo + ";" + sistem.listaMagos.get(selec - 1).hechizosFormatoTxt();
+					sistem.modificarTexto("Magos.txt", sistem.listaMagos.get(selec - 1).magoFormatoTxt(), nombreNuevoTxt);
+					sistem.listaMagos.get(selec-1).setNombre(nombreNuevo);
 					break;
 				} else if (cambio == 2) {
 					boolean salir = false;
@@ -108,7 +119,7 @@ public class MenuAdmin {
 							System.out.println("Que hechizo desea agregar:");
 							int cont = 1;
 							for (Hechizo hechizo : sistem.listaHechizos) {
-								System.out.println((cont++) + hechizo.getNombre());
+								System.out.println((cont++)+") " + hechizo.getNombre());
 							}
 							Integer hechizoSelec = Integer.valueOf(scan.nextLine());
 							sistem.listaMagos.get(selec - 1)
@@ -118,7 +129,7 @@ public class MenuAdmin {
 							System.out.println("Que hechizo desea eliminar:");
 							int cont = 1;
 							for (Hechizo hechizo : sistem.listaMagos.get(selec - 1).getListaHechizos()) {
-								System.out.println((cont++) + hechizo.getNombre());
+								System.out.println((cont++) +") " + hechizo.getNombre());
 							}
 							Integer hechizoSelec = Integer.valueOf(scan.nextLine());
 							sistem.listaMagos.get(selec - 1).olvidarHechizo(
@@ -174,7 +185,7 @@ public class MenuAdmin {
 					
 					String nuevoHechizo = nombreHechizo+";Fuego;"+daño+";"+quemadura;
 					sistem.cargarHechizo(nuevoHechizo);
-					sistem.agregarTexto("Hechizos.txt", nuevoHechizo);
+					sistem.agregarTexto(nuevoHechizo,"Hechizos.txt");
 					break;
 				}else if (elemento.equalsIgnoreCase("tierra")) {
 					System.out.println("Mejora de defensa?");
@@ -182,7 +193,7 @@ public class MenuAdmin {
 					
 					String nuevoHechizo = nombreHechizo+";Tierra;"+daño+";"+defensa;
 					sistem.cargarHechizo(nuevoHechizo);
-					sistem.agregarTexto("Hechizos.txt", nuevoHechizo);
+					sistem.agregarTexto(nuevoHechizo,"Hechizos.txt");
 					break;
 				}else if (elemento.equalsIgnoreCase("agua")) {
 					System.out.println("Cantidad de curacion?");
@@ -192,7 +203,7 @@ public class MenuAdmin {
 					
 					String nuevoHechizo = nombreHechizo+";Agua;"+daño+";"+curacion+","+presion ;
 					sistem.cargarHechizo(nuevoHechizo);
-					sistem.agregarTexto("Hechizos.txt", nuevoHechizo);
+					sistem.agregarTexto(nuevoHechizo,"Hechizos.txt");
 					break;
 					
 				}else if (elemento.equalsIgnoreCase("planta")) {
@@ -203,7 +214,7 @@ public class MenuAdmin {
 					
 					String nuevoHechizo = nombreHechizo+";Agua;"+daño+";"+stun+","+cant ;
 					sistem.cargarHechizo(nuevoHechizo);
-					sistem.agregarTexto("Hechizos.txt", nuevoHechizo);
+					sistem.agregarTexto(nuevoHechizo,"Hechizos.txt");
 					break;
 					
 				}else {
@@ -214,7 +225,6 @@ public class MenuAdmin {
 				
 			} while (true);
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 		
 
@@ -240,7 +250,7 @@ public class MenuAdmin {
 						String hechizoOriginal = hechizo.formatoTxt();
 						hechizo.setNombre(nombre);
 						
-						sistem.modificarTexto("Hechizo.txt", hechizoOriginal, hechizo.formatoTxt());
+						sistem.modificarTexto("Hechizos.txt", hechizoOriginal, hechizo.formatoTxt());
 						break;
 					}else if (selec == 2) {
 						System.out.println("Nuevo daño:");
@@ -248,7 +258,7 @@ public class MenuAdmin {
 						String hechizoOriginal = hechizo.formatoTxt();
 						hechizo.setDaño(daño);
 						
-						sistem.modificarTexto("Hechizo.txt", hechizoOriginal, hechizo.formatoTxt());
+						sistem.modificarTexto("Hechizos.txt", hechizoOriginal, hechizo.formatoTxt());
 						break;
 					}else if (selec == 3) {
 						System.out.println("Nueva Quemadura:");
@@ -256,7 +266,7 @@ public class MenuAdmin {
 						String hechizoOriginal = hechizo.formatoTxt();
 						hechizo.setEspecial1(quemadura);
 						
-						sistem.modificarTexto("Hechizo.txt", hechizoOriginal, hechizo.formatoTxt());
+						sistem.modificarTexto("Hechizos.txt", hechizoOriginal, hechizo.formatoTxt());
 						break;
 					}
 
@@ -270,7 +280,7 @@ public class MenuAdmin {
 						String hechizoOriginal = hechizo.formatoTxt();
 						hechizo.setNombre(nombre);
 						
-						sistem.modificarTexto("Hechizo.txt", hechizoOriginal, hechizo.formatoTxt());
+						sistem.modificarTexto("Hechizos.txt", hechizoOriginal, hechizo.formatoTxt());
 						break;
 					}else if (selec == 2) {
 						System.out.println("Nuevo daño:");
@@ -278,7 +288,7 @@ public class MenuAdmin {
 						String hechizoOriginal = hechizo.formatoTxt();
 						hechizo.setDaño(daño);
 						
-						sistem.modificarTexto("Hechizo.txt", hechizoOriginal, hechizo.formatoTxt());
+						sistem.modificarTexto("Hechizos.txt", hechizoOriginal, hechizo.formatoTxt());
 						break;
 					}else if (selec == 3) {
 						System.out.println("Nueva Mejora de defensa:");
@@ -286,7 +296,7 @@ public class MenuAdmin {
 						String hechizoOriginal = hechizo.formatoTxt();
 						hechizo.setEspecial1(mejoraDefensa);
 						
-						sistem.modificarTexto("Hechizo.txt", hechizoOriginal, hechizo.formatoTxt());
+						sistem.modificarTexto("Hechizos.txt", hechizoOriginal, hechizo.formatoTxt());
 						break;
 					}
 				}else if (hechizo.getTipo().equalsIgnoreCase("Agua")) {
@@ -299,7 +309,7 @@ public class MenuAdmin {
 						String hechizoOriginal = hechizo.formatoTxt();
 						hechizo.setNombre(nombre);
 						
-						sistem.modificarTexto("Hechizo.txt", hechizoOriginal, hechizo.formatoTxt());
+						sistem.modificarTexto("Hechizos.txt", hechizoOriginal, hechizo.formatoTxt());
 						break;
 					}else if (selec == 2) {
 						System.out.println("Nuevo daño:");
@@ -307,7 +317,7 @@ public class MenuAdmin {
 						String hechizoOriginal = hechizo.formatoTxt();
 						hechizo.setDaño(daño);
 						
-						sistem.modificarTexto("Hechizo.txt", hechizoOriginal, hechizo.formatoTxt());
+						sistem.modificarTexto("Hechizos.txt", hechizoOriginal, hechizo.formatoTxt());
 						break;
 					}else if (selec == 3) {
 						System.out.println("Nueva Curacion:");
@@ -315,7 +325,7 @@ public class MenuAdmin {
 						String hechizoOriginal = hechizo.formatoTxt();
 						hechizo.setEspecial1(curacion);
 						
-						sistem.modificarTexto("Hechizo.txt", hechizoOriginal, hechizo.formatoTxt());
+						sistem.modificarTexto("Hechizos.txt", hechizoOriginal, hechizo.formatoTxt());
 						break;
 					}else if (selec == 4) {
 						System.out.println("Nueva Presion:");
@@ -323,7 +333,7 @@ public class MenuAdmin {
 						String hechizoOriginal = hechizo.formatoTxt();
 						hechizo.setEspecial2(presion);
 						
-						sistem.modificarTexto("Hechizo.txt", hechizoOriginal, hechizo.formatoTxt());
+						sistem.modificarTexto("Hechizos.txt", hechizoOriginal, hechizo.formatoTxt());
 						break;
 					}
 					
@@ -337,7 +347,7 @@ public class MenuAdmin {
 						String hechizoOriginal = hechizo.formatoTxt();
 						hechizo.setNombre(nombre);
 						
-						sistem.modificarTexto("Hechizo.txt", hechizoOriginal, hechizo.formatoTxt());
+						sistem.modificarTexto("Hechizos.txt", hechizoOriginal, hechizo.formatoTxt());
 						break;
 					}else if (selec == 2) {
 						System.out.println("Nuevo daño:");
@@ -345,7 +355,7 @@ public class MenuAdmin {
 						String hechizoOriginal = hechizo.formatoTxt();
 						hechizo.setDaño(daño);
 						
-						sistem.modificarTexto("Hechizo.txt", hechizoOriginal, hechizo.formatoTxt());
+						sistem.modificarTexto("Hechizos.txt", hechizoOriginal, hechizo.formatoTxt());
 						break;
 					}else if (selec == 3) {
 						System.out.println("Nueva Duracion de stun:");
@@ -353,7 +363,7 @@ public class MenuAdmin {
 						String hechizoOriginal = hechizo.formatoTxt();
 						hechizo.setEspecial1(stun);
 						
-						sistem.modificarTexto("Hechizo.txt", hechizoOriginal, hechizo.formatoTxt());
+						sistem.modificarTexto("Hechizos.txt", hechizoOriginal, hechizo.formatoTxt());
 						break;
 					}else if (selec == 4) {
 						System.out.println("Nueva cantidad de plantas:");
@@ -361,7 +371,7 @@ public class MenuAdmin {
 						String hechizoOriginal = hechizo.formatoTxt();
 						hechizo.setEspecial2(plantas);
 						
-						sistem.modificarTexto("Hechizo.txt", hechizoOriginal, hechizo.formatoTxt());
+						sistem.modificarTexto("Hechizos.txt", hechizoOriginal, hechizo.formatoTxt());
 						break;
 					}
 				}
@@ -382,7 +392,7 @@ public class MenuAdmin {
 					System.out.println((i + 1) + ") " + sistem.listaHechizos.get(i));
 				}
 				Integer selec = Integer.valueOf(scan.nextLine());
-				sistem.eliminarTexto("Hechizo.txt", sistem.listaHechizos.get(selec - 1).formatoTxt());
+				sistem.eliminarTexto("Hechizos.txt", sistem.listaHechizos.get(selec - 1).formatoTxt());
 				sistem.listaHechizos.remove(selec - 1);
 				break;
 			} while (true);
